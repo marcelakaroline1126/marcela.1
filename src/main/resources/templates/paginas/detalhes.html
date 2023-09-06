@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sorveteria</title>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+</head>
+<body>
+	<div th:replace="~{navv :: navv}"></div>
+	<div class="container">
+		<h1>Cliente</h1>
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<div class="row">
+			<div class="col s12">
+				<div class="card ">
+					<div class="card-content">
+						<span class="card-title">Detalhes do Pedido</span>
+						<p>
+							<strong>Id: </strong><span th:text="${sorvete.id}">1</span>
+						</p>
+						<p>
+							<strong>Valor: </strong><span th:text="${sorvete.valor}">um</span>
+						</p>
+						<p>
+							<strong>Sabor: </strong><span th:text="${sorvete.sabor}">morango</span>
+						</p>
+						<p>
+							<strong>Cobertura: </strong><span th:text="${sorvete.cobertura}">chocolate</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Dados do Cliente</span>
+						<form
+							th:action="@{/sorveteria/{idSorvete}(idSorvete=${sorvete.id})}"
+							method="post" th:object="${cliente}">
+							<div>
+								<input type="hidden" th:field="*{id}" readonly="readonly">
+							</div>
+							<div>
+								<p th:errors="*{nome}"></p>
+								<label>Nome: </label><input type="text" th:field="*{nome}">
+							</div>
+							<div>
+								<p th:errors="*{rg}"></p>
+								<label>Rg: </label><input type="text" th:field="*{rg}">
+							</div>
+							<div>
+								<button type="submit" class="btn">Salvar</button>
+								<button type="reset" class="btn">Limpar</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Cliente</span>
+						<table class="highlight">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Rg</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="c : ${clientes}">
+									<td th:text="${c.id}">1</td>
+									<td th:text="${c.nome}">sabrina</td>
+									<td th:text="${c.rg}">1</td>
+									<td><a
+										th:href="@{/sorveteria/{idSorvete}/clientes/{idCliente}/deletar (idSorvete=${sorvete.id}, idCliente=${c.id})}"><i
+											class="material-icons">delete</i></a> <a
+										th:href="@{/sorveteria/{idSorvete}/clientes/{idCliente}/selecionar (idSorvete=${sorvete.id}, idCliente=${c.id})}"><i
+											class="material-icons">edit</i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sorveteria</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+	<div th:replace="~{navv :: navv}"></div>
+	<div class="container">
+		<h1>FAÇA SEU PEDIDO</h1>
+		<form action="/sorveteria/add" method="post" th:object="${sorvete}">
+
+			<div>
+				<input type="hidden" th:field="*{id}" readonly="readonly">
+			</div>
+			<div>
+				<label><strong>Valor:</strong></label> <input type="text"
+					th:field="*{valor}">
+				<p th:errors="*{valor}"></p>
+			</div>
+			<div>
+				<br> <label><strong>Sabor:</strong></label> <input type="text"
+					th:field="*{sabor}">
+				<p th:errors="*{sabor}"></p>
+			</div>
+			<div>
+				<br> <label><strong>Cobertura:</strong></label> <input
+					type="text" th:field="*{cobertura}">
+				<p th:errors="*{cobertura}"></p>
+			</div>
+			<br> <br>
+			<div>
+				<button class="btn-small waves-effect waves-light" type="submit">
+					<strong>Finalizar</strong>
+				</button>
+				<button class="waves-effect waves-light btn-small" type="reset">
+					<strong>Limpar</strong>
+				</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sorveteria</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+</head>
+<body>
+	<div th:replace="~{navv :: navv}"></div>
+	<div class="container">
+		<h1>Lista de Pedidos</h1>
+		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<table class="highlight">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Valor</th>
+					<th>Sabor</th>
+					<th>Cobertura</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="e : ${sorvetes}">
+					<th th:text="${e.id}">1</th>
+					<th><a th:href="@{/sorveteria/{id}(id=${e.id})}"><span
+							th:text="${e.valor}">um</span></a></th>
+					<th th:text="${e.sabor}">chocolate</th>
+					<th th:text="${e.cobertura}">morango</th>
+					<td><a th:href="@{/sorveteria/{id}/selecionar(id=${e.id})}"><i
+							class="material-icons">edit</i></a> <a
+						th:href="@{/sorveteria/{id}/remover(id=${e.id})}"><i
+							class="material-icons">delete</i></a></td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</body>
+</html>
